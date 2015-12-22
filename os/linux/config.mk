@@ -649,7 +649,7 @@ WFLAGS += -DMT7630
 endif
 
 ifneq ($(findstring mt7610u,$(CHIPSET)),)
-WFLAGS += -DMT7610
+WFLAGS += -DMT7610 -Wno-error=date-time
 endif
 
 ifneq ($(findstring $(RT28xx_MODE),AP),)
