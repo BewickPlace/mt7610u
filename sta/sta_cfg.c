@@ -7883,6 +7883,7 @@ INT RTMP_STA_IoctlHandle(
 			RTMPIoctlGetSiteSurvey(pAd, pRequest);
 			break;
 
+#ifdef DBG
 		case CMD_RTPRIV_IOCTL_MAC:
 			RTMPIoctlMAC(pAd, pRequest);
 			break;
@@ -7890,6 +7891,7 @@ INT RTMP_STA_IoctlHandle(
 		case CMD_RTPRIV_IOCTL_E2P:
 			RTMPIoctlE2PROM(pAd, pRequest);
 			break;
+#endif /* DBG */
 
 		case CMD_RTPRIV_IOCTL_RF:
 			break;
