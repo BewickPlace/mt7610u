@@ -23,12 +23,12 @@ HAS_APCLI=n
 
 # Support Wpa_Supplicant
 # i.e. wpa_supplicant -Dralink
-HAS_WPA_SUPPLICANT=n
+HAS_WPA_SUPPLICANT=y
 
 
 # Support Native WpaSupplicant for Network Maganger
 # i.e. wpa_supplicant -Dwext
-HAS_NATIVE_WPA_SUPPLICANT_SUPPORT=n
+HAS_NATIVE_WPA_SUPPLICANT_SUPPORT=y
 
 #Support Net interface block while Tx-Sw queue full
 HAS_BLOCK_NET_IF=n
@@ -277,7 +277,7 @@ endif
 # config for STA mode
 
 ifeq ($(RT28xx_MODE),STA)
-WFLAGS += -DCONFIG_STA_SUPPORT -DSCAN_SUPPORT -DDBG
+WFLAGS += -DCONFIG_STA_SUPPORT -DSCAN_SUPPORT
 
 ifeq ($(HAS_HDR_TRANS_SUPPORT),y)
 WFLAGS += -DHDR_TRANS_TX_SUPPORT
@@ -649,7 +649,7 @@ WFLAGS += -DMT7630
 endif
 
 ifneq ($(findstring mt7610u,$(CHIPSET)),)
-WFLAGS += -DMT7610 -Wno-error=date-time
+WFLAGS += -DMT7610 -Wno-error=date-time 
 endif
 
 ifneq ($(findstring $(RT28xx_MODE),AP),)
@@ -660,7 +660,7 @@ ifeq ($(HAS_CSO_SUPPORT), y)
 WFLAGS += -DCONFIG_CSO_SUPPORT -DCONFIG_TSO_SUPPORT
 endif
 
-CHIPSET_DAT = 2860
+CHIPSET_DAT = 2870
 endif
 
 ifneq ($(or $(findstring mt7662e,$(CHIPSET)),$(findstring mt7612e,$(CHIPSET))),)
