@@ -1454,7 +1454,7 @@ enum WIFI_MODE{
 #define REGION_21_A_BAND                  21
 // only for HE Pana Box, disable dfs channel on US, Gary modify
 #define REGION_22_A_BAND                  22 /* 36, 40, 44, 48, 52, 56, 60, 64 */
-#define REGION_MAXIMUM_A_BAND             37
+#define REGION_MAXIMUM_A_BAND             14	/* Restrict maximum to more standard device options */
 
 /* The security mode definition in MAC register */
 #define CIPHER_NONE                 0
@@ -1621,8 +1621,8 @@ enum WIFI_MODE{
 #define INF_MBSSID_DEV_NAME		"wlan"
 #else
 #if CONFIG_RT_FIRST_CARD == 7610
-#define INF_MAIN_DEV_NAME		"ra"
-#define INF_MBSSID_DEV_NAME		"ra"
+#define INF_MAIN_DEV_NAME		"wlan"
+#define INF_MBSSID_DEV_NAME		"wlan"
 #elif CONFIG_RT_SECOND_CARD == 7610
 #define INF_MAIN_DEV_NAME		"rai"
 #define INF_MBSSID_DEV_NAME		"rai"
