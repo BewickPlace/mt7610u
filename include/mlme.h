@@ -122,7 +122,7 @@ extern UINT32 CW_MAX_IN_BITS;
 
 
 #ifdef CONFIG_STA_SUPPORT
-#define MAX_LEN_OF_MLME_QUEUE            40 /*10 */
+#define MAX_LEN_OF_MLME_QUEUE            64 /*Advised in v3.0.0.4 release notes (for noisy environments) */
 #endif /* CONFIG_STA_SUPPORT */
 
 enum SCAN_MODE{
