@@ -2105,6 +2105,7 @@ INT MT76x0_ReadChannelPwr(RTMP_ADAPTER *pAd)
 		pAd->TxPower[idx].Power = tx_pwr1;
 		pAd->TxPower[idx + 1].Power = tx_pwr2;
 		choffset++;
+		choffset++;
 	}
 
 
