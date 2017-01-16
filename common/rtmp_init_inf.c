@@ -650,7 +650,7 @@ VOID RTMPDrvSTAOpen(
 #endif /* MT76x0 */
 
 	RTMP_IO_READ32(pAd, 0x1300, &reg);  /* clear garbage interrupts*/
-	DBGPRINT(RT_DEBUG_OFF, ("0x1300 = %08x\n", reg));
+	DBGPRINT(RT_DEBUG_OFF, ("Clear Interrupts: 0x1300 = %08x\n", reg));
 
 
 
