@@ -901,6 +901,7 @@ VOID STAMlmePeriodicExec(
 #endif /* WPA_SUPPLICANT_SUPPORT */        
     {
     	/* WPA MIC error should block association attempt for 60 seconds*/
+
 		if (pAd->StaCfg.bBlockAssoc && 
 			RTMP_TIME_AFTER(pAd->Mlme.Now32, pAd->StaCfg.LastMicErrorTime + (60*OS_HZ)))
     		pAd->StaCfg.bBlockAssoc = FALSE;
@@ -1158,11 +1159,28 @@ VOID STAMlmePeriodicExec(
 			(pAd->StaCfg.bImprovedScan == FALSE) &&
 			((TxTotalCnt + pAd->RalinkCounters.OneSecRxOkCnt) < 600))
 		{
-			printk("pAd->PendingRx = %d\n", pAd->PendingRx);
-			RTMPSetAGCInitValue(pAd, BW_20);
-			DBGPRINT(RT_DEBUG_TRACE, ("MMCHK - No BEACON. restore R66 to the low bound(%d) \n", (0x2E + GET_LNA_GAIN(pAd))));
-		}
+			if (pAd->PendingRx > 0) {
+				ULONG BPtoJiffies;
+				LONG timeDiff;
 
+				BPtoJiffies = (((pAd->CommonCfg.BeaconPeriod * 1024 / 1000) * OS_HZ) / 1000);
+				timeDiff = (pAd->Mlme.Now32 - pAd->StaCfg.LastBeaconRxTime) / BPtoJiffies;
+				if (timeDiff > 0)
+					pAd->StaCfg.LastBeaconRxTime += (timeDiff * BPtoJiffies);
+
+				if (RTMP_TIME_AFTER(pAd->StaCfg.LastBeaconRxTime, pAd->Mlme.Now32))
+				{
+					DBGPRINT(RT_DEBUG_TRACE, ("MMCHK - BeaconRxTime adjust wrong(BeaconRx=0x%lx, Now=0x%lx)\n",
+									pAd->StaCfg.LastBeaconRxTime, pAd->Mlme.Now32));
+				}
+				printk("MMCHK - BEACON Delayed (%d) mid USB transfer (%d): SIMULATED\n", (int)(timeDiff * BPtoJiffies), pAd->PendingRx);
+				DBGPRINT(RT_DEBUG_TRACE, ("MMCHK - BEACON Delayed (%d) mid USB transfer (%d): SIMULATED\n", (int)(timeDiff * BPtoJiffies), pAd->PendingRx));
+			} else {
+
+				RTMPSetAGCInitValue(pAd, BW_20);
+				DBGPRINT(RT_DEBUG_TRACE, ("MMCHK - No BEACON. restore R66 to the low bound(%d) \n", (0x2E + GET_LNA_GAIN(pAd))));
+			}
+		}
 
 #ifdef RTMP_MAC_USB
 #ifdef DOT11_N_SUPPORT
