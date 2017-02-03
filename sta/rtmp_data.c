@@ -527,6 +527,7 @@ if (0 /*!(pRxInfo->Mcast || pRxInfo->Bcast)*/){
 #endif /* WFA_VHT_PF */
 #endif /* DOT11_VHT_AC */
 	}
+	pAd->RalinkCounters.OneSecRxOkCnt++;				// Increment Rx Packet Count, used for quality calculation
 
 #ifdef RTMP_MAC_USB
 #endif /* RTMP_MAC_USB */
