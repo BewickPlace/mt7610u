@@ -48,6 +48,7 @@ INT SetCommonVHT(RTMP_ADAPTER *pAd)
 	if (!WMODE_CAP_AC(pAd->CommonCfg.PhyMode))
 	{
 		/* Clear previous VHT information */
+		pAd->CommonCfg.vht_cent_ch = 0;
 		return FALSE;
 	}
 
