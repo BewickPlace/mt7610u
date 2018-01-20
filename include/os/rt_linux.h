@@ -1382,7 +1382,7 @@ USBHST_STATUS RTUSBBulkCmdRspEventComplete(URBCompleteStatus Status, purbb_t pUR
 				TransferDma)				\
   				do{	\
 					usb_fill_bulk_urb(pUrb, pUsb_Dev, usb_sndbulkpipe(pUsb_Dev, uEndpointAddress),	\
-								pTransferBuf, BufSize, Complete, pContext);	\
+								pTransferBuf, BufSize, (usb_complete_t)Complete, pContext);	\
 					pUrb->transfer_dma	= TransferDma; \
 					pUrb->transfer_flags |= URB_NO_TRANSFER_DMA_MAP;	\
 				}while(0)
