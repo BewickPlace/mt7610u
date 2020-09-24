@@ -390,14 +390,14 @@ ifeq ($(OSABL),YES)
 	$(MAKE) -C $(LINUX_SRC) SUBDIRS=$(RT28xx_DIR)/os/linux modules
 endif
 
-	cp -f os/linux/Makefile.6 $(RT28xx_DIR)/os/linux/Makefile
+	ls -f os/linux/Makefile.6 $(RT28xx_DIR)/os/linux/Makefile
 ifeq ($(PLATFORM),DM6446)
 	$(MAKE)  ARCH=arm CROSS_COMPILE=arm_v5t_le- -C  $(LINUX_SRC) SUBDIRS=$(RT28xx_DIR)/os/linux modules
 else
 ifeq ($(PLATFORM),FREESCALE8377)
 	$(MAKE) ARCH=powerpc CROSS_COMPILE=$(CROSS_COMPILE) -C  $(LINUX_SRC) SUBDIRS=$(RT28xx_DIR)/os/linux modules
 else
-	$(MAKE) -C $(LINUX_SRC) SUBDIRS=$(RT28xx_DIR)/os/linux modules
+	$(MAKE) -C $(LINUX_SRC) M=$(RT28xx_DIR)/os/linux modules
 endif
 endif
 
